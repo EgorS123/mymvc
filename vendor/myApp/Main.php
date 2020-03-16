@@ -15,38 +15,13 @@ class App
 
 		require PATH_ROOT.'/routes/web.php';
 
-		/*$pattern = '~{(.*?)}~';
+		$action = $web->spot();
 
-		$subject = '/wqeqwe/{id:int}/{some:str}';
+		$controller = new $action['controller'];
 
-		$subject = explode('/', $subject);
-
-		$replacement = '$1';
-
-		$res = preg_grep($pattern, $subject);
-
-		foreach ($subject as $key => $value) {
-			if (preg_match("~{(.*?)}~", $value))
-			{
-				$subject[$key] =  preg_replace('~(int)~', '([0-9]+)', $value);
-			}
-		}
-		
-		dump($subject);*/
-		
-		/*$pattern = '/';
-
-		$subject = '/';
-
-
-		if (preg_match("~$pattern\Z~i", $subject, $match))
-		{
-			dump($match);
-		}*/
-
-		$controller = $web->spot();
-
-		dump($controller);
+		$rendering = call_user_func_array([$controller, $action['action']], $action['param']);
+	
+		echo $rendering;
 	}
 }
 

@@ -17,7 +17,7 @@ class Route
 		$url = preg_replace("~{str}~", '([a-z]+)', $url);
 		$url = preg_replace("~{}~", '(.*?)', $url);
 
-		self::$routes[$url] = [['method' => 'get'], [$controller => $action]];
+		self::$routes[$url] = ['method' => 'get', 'controller' => $controller, 'action' => $action];
 	}
 
 	public function spot()
@@ -28,7 +28,7 @@ class Route
 		{
 			$method = array_shift($controller);
 
-			if ($method['method'] == $this->method)
+			if ($method == $this->method)
 			{
 				continue;
 			}
@@ -36,16 +36,13 @@ class Route
 			{
 				$find = true;
 				array_shift($match);
-				extract($controller[0]); 
-				$actionController = [];
-				$actionController['controller'] = $controller[0];
-				$actionController['parameters'] = $match;
+				$controller['param'] = $match;
 				break;
 			}
 		}
 		if ($find)
 		{
-			return $actionController;
+			return $controller;
 		} else
 		{
 			return ['controller', 'notFind'];
