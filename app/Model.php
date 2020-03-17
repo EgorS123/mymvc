@@ -2,7 +2,9 @@
 
 namespace App;
 
-class Model
+use myApp\Models\BaseModel;
+
+class Model extends BaseModel
 {
 	
 }

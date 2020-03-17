@@ -19,7 +19,11 @@ class App
 
 		$controller = new $action['controller'];
 
-		$rendering = call_user_func_array([$controller, $action['action']], $action['param']);
+		try {
+			$rendering = call_user_func_array([$controller, $action['action']], $action['param']);
+		} catch (Exception $e) {
+			echo $e->getMessage;
+		}
 	
 		echo $rendering;
 	}

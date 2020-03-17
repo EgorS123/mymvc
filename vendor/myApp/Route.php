@@ -45,7 +45,7 @@ class Route
 			return $controller;
 		} else
 		{
-			return ['controller', 'notFind'];
+			return ['controller' => 'Controller', 'action' => 'notFind', 'param' => []];
 		}
 	}
 }
